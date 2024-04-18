@@ -9,24 +9,18 @@ const payos = new PayOS(
     '608d75517b129265ef1f4f4f452de476b501a1b5af7e518644d489dda6f96f76'
 );
 
-const DOMAIN = 'http://localhost:3001';
 const port = process.env.PORT || 4000;
 const hostname = process.env.HOST_NAME;
 const app = express();
 const connection = require('./src/configdb')
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const { makeOrder } = require('./src/handleOrder');
 
 app.use(express.static('src'));
 app.use(express.json());
 
 app.post('/create-payment-link', async (req, res) => {
-    const order = {
-        amount: 10000,
-        description: 'Thanh toan mua sach',
-        orderCode: 13,
-        returnUrl: `${DOMAIN}/success.html`,
-        cancelUrl: `${DOMAIN}/cancel.html`,
-    };
+    const order = await makeOrder();
     const paymentLink = await payos.createPaymentLink(order);
     res.redirect(303, paymentLink.checkoutUrl);
 });
