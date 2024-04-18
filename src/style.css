@@ -1,0 +1,25 @@
+.card {
+    margin-top: 50px;
+}
+
+button {
+    margin-left: 45px;
+}
+
+h4 {
+    margin-top: 8%;
+    margin-left: 45%;
+    font-size: large;
+    color: green;
+}
+
+.back {
+    margin-left: 2%;
+    text-decoration: none;
+}
+
+.success {
+    margin-left: 47%;
+    font-size: large;
+    text-decoration: none;
+}
